@@ -396,9 +396,9 @@ open class IncrementalJvmCache(
             }
 
             for (const in oldMap.keys + newMap.keys) {
+                //Constant can be declared via companion object or via const field declaration
                 changesCollector.collectMemberIfValueWasChanged(kotlinClass.scopeFqName(companion = true), const, oldMap[const], newMap[const])
-                // may be we need extra line, that should be checked. Case java+kotlin interop:
-                // changesCollector.collectMemberIfValueWasChanged(kotlinClass.scopeFqName(companion = false), const, oldMap[const], newMap[const])
+                changesCollector.collectMemberIfValueWasChanged(kotlinClass.scopeFqName(companion = false), const, oldMap[const], newMap[const])
             }
         }
 
